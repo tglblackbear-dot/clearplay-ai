@@ -6,7 +6,7 @@ Plataforma inteligente de análise audiovisual, filtragem de cenas e reproduçã
 
 ## Status
 
-**Fase 1 — Fundação (em andamento).** Este repositório contém a arquitetura, os contratos entre frontend/backend/extensão e o MVP estrutural. Funcionalidades de análise audiovisual, IA e sincronização serão implementadas nas fases seguintes e não são simuladas aqui.
+**Fase 2 em andamento.** Fase 1 concluída (arquitetura, contratos, frontend, backend, extensão, CI/CD). Já implementado na Fase 2: leitura de SRT/VTT, análise contextual de legendas e geração de mapas em `draft`. Ainda não implementados: visão computacional, sincronização e saltos automáticos.
 
 ## Princípios
 

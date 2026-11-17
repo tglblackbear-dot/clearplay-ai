@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from "react-router-dom";
-import { BarChart3, Clapperboard, History, Settings, SlidersHorizontal } from "lucide-react";
+import { BarChart3, Clapperboard, FileSearch, History, Settings, SlidersHorizontal } from "lucide-react";
 import { DashboardPage } from "./pages/DashboardPage";
+import { AnalysisPage } from "./pages/AnalysisPage";
 import { PlaybackPage } from "./pages/PlaybackPage";
 import { ProfilesPage } from "./pages/ProfilesPage";
 import { HistoryPage } from "./pages/HistoryPage";
@@ -9,6 +10,7 @@ import { SettingsPage } from "./pages/SettingsPage";
 const nav = [
   { to: "/", label: "Dashboard", icon: BarChart3, end: true },
   { to: "/playback", label: "Reprodução", icon: Clapperboard },
+  { to: "/analysis", label: "Análise", icon: FileSearch },
   { to: "/profiles", label: "Perfis", icon: SlidersHorizontal },
   { to: "/history", label: "Histórico", icon: History },
   { to: "/settings", label: "Configurações", icon: Settings },
@@ -35,6 +37,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/playback" element={<PlaybackPage />} />
+          <Route path="/analysis" element={<AnalysisPage />} />
           <Route path="/profiles" element={<ProfilesPage />} />
           <Route path="/history" element={<HistoryPage />} />
           <Route path="/settings" element={<SettingsPage />} />
