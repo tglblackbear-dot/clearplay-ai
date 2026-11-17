@@ -6,7 +6,7 @@ Plataforma inteligente de análise audiovisual, filtragem de cenas e reproduçã
 
 ## Status
 
-**Fase 2 em andamento.** Fase 1 concluída (arquitetura, contratos, frontend, backend, extensão, CI/CD). Já implementado na Fase 2: leitura de SRT/VTT, análise contextual de legendas e geração de mapas em `draft`. Ainda não implementados: visão computacional, sincronização e saltos automáticos.
+**Fase 2/3 entregues.** Leitura SRT/VTT, análise contextual, geração de mapas, extração de quadros, detecção de cortes, classificação multimodal opcional (Gemini), controlador de saltos da extensão e efeitos de transição. Ainda dependem de hospedagem/credenciais: backend público, Supabase Auth e catálogo externo (TMDb/IMDb).
 
 ## Princípios
 

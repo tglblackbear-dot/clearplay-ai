@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { analyzeSubtitles, type AnalysisResult } from "../services/analysis";
+import { analyzeSubtitles, analyzeVideo, type AnalysisResult } from "../services/analysis";
 import { formatClock } from "../utils/format";
 import { EmptyState } from "../components/EmptyState";
 
@@ -17,6 +17,24 @@ export function AnalysisPage() {
   const [subtitle, setSubtitle] = useState("");
   const [fileName, setFileName] = useState("");
   const [error, setError] = useState("");
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoSubtitle, setVideoSubtitle] = useState<File | null>(null);
+  const [videoDuration, setVideoDuration] = useState("");
+
+  const videoAnalysis = useMutation({
+    mutationFn: () => {
+      if (!videoFile) throw new Error("Selecione um vídeo.");
+      return analyzeVideo({
+        video: videoFile,
+        subtitle: videoSubtitle ?? undefined,
+        duration_ms: Number(videoDuration) * 1000,
+        content_id: contentId.trim(),
+        episode_id: episodeId.trim(),
+      });
+    },
+    onSuccess: () => setError(""),
+    onError: (err: Error) => setError(err.message),
+  });
 
   const analysis = useMutation({
     mutationFn: () => analyzeSubtitles({
@@ -36,7 +54,7 @@ export function AnalysisPage() {
   }
 
   const ready = Boolean(subtitle.trim() && contentId.trim() && episodeId.trim() && Number(duration) > 0);
-  const result: AnalysisResult | undefined = analysis.data;
+  const result: AnalysisResult | undefined = videoAnalysis.data ?? analysis.data;
 
   return (
     <>
@@ -68,6 +86,27 @@ export function AnalysisPage() {
             {analysis.isPending ? "Analisando…" : "Gerar mapa"}
           </button>
           {error && <p className="badge error" style={{ marginTop: 12 }}>{error}</p>}
+        </section>
+
+        <section className="card">
+          <h2>Análise com vídeo</h2>
+          <p className="muted" style={{ marginBottom: 14 }}>Envie um vídeo autorizado. O arquivo é temporário e não é armazenado.</p>
+          <div className="field">
+            <label>Arquivo de vídeo</label>
+            <input type="file" accept="video/mp4,video/webm,video/quicktime" onChange={(e) => setVideoFile(e.target.files?.[0] ?? null)} />
+          </div>
+          <div className="field">
+            <label>Legenda SRT/VTT (opcional)</label>
+            <input type="file" accept=".srt,.vtt,text/plain" onChange={(e) => setVideoSubtitle(e.target.files?.[0] ?? null)} />
+          </div>
+          <div className="field">
+            <label>Duração (segundos)</label>
+            <input type="number" min="1" value={videoDuration} onChange={(e) => setVideoDuration(e.target.value)} placeholder="3600" />
+          </div>
+          <button className="btn btn-ghost" disabled={!videoFile || !contentId.trim() || !episodeId.trim() || !Number(videoDuration) || videoAnalysis.isPending} onClick={() => videoAnalysis.mutate()}>
+            {videoAnalysis.isPending ? "Analisando vídeo…" : "Analisar vídeo"}
+          </button>
+          {videoAnalysis.data && <p className="muted" style={{ marginTop: 12 }}>{videoAnalysis.data.frames_analyzed} quadros analisados · {videoAnalysis.data.scene_cuts} cortes detectados</p>}
         </section>
 
         <section className="card">
