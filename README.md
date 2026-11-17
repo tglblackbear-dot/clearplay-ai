@@ -39,6 +39,10 @@ cd frontend && npm install && npm run dev
 
 Frontend: `http://localhost:5173` · API: `http://localhost:8000/docs`
 
+## Publicar o backend
+
+Use `infrastructure/deployment/render.yaml` para criar um Web Service na Render conectado a este repositório. Depois configure `VITE_API_URL` no GitHub Actions com a URL do serviço para o frontend publicado usar a API real.
+
 ## Documentação
 
 - `docs/architecture.md`
