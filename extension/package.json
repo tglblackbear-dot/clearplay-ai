@@ -1,0 +1,12 @@
+{
+  "name": "clearplay-ai-extension",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild background/service-worker.ts --bundle --format=esm --outfile=background/service-worker.js && esbuild content/player-detector.ts --bundle --format=esm --outfile=content/player-detector.js && esbuild popup/popup.ts --bundle --format=esm --outfile=popup/popup.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}
