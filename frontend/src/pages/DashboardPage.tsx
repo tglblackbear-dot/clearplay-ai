@@ -12,7 +12,7 @@ export function DashboardPage() {
       <p className="subtitle">Assista ao que você ama. Do seu jeito.</p>
       <div className="grid grid-stats">
         <div className="card"><div className="label">Backend</div><div className="value" style={{ fontSize: 15 }}>{health.isLoading ? "Verificando…" : <span className={`badge ${apiOk ? "ok" : "error"}`}>{apiOk ? "Online" : "Offline"}</span>}</div></div>
-        <div className="card"><div className="label">Extensão</div><div className="value" style={{ fontSize: 15 }}><span className="badge error">Não instalada</span></div></div>
+        <div className="card"><div className="label">Extensão</div><div className="value" style={{ fontSize: 15 }}><span className="badge error">Não instalada</span></div><a className="muted" style={{ display: "inline-block", marginTop: 8, color: "#80A8FF" }} href="https://github.com/tglblackbear-dot/clearplay-ai/blob/main/docs/user-guide.md" target="_blank" rel="noreferrer">Como instalar →</a></div>
         <div className="card"><div className="label">Conteúdo identificado</div><div className="value">—</div></div>
         <div className="card"><div className="label">Cenas filtradas</div><div className="value">—</div></div>
       </div>
